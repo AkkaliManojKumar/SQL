@@ -1,0 +1,66 @@
+--select *from dept
+--select *from emp
+--select job,sal,empno from emp where empno=7566
+--select *from emp where empno=7566
+--select *from emp where deptno=20
+--select *from emp where job='CLERK' OR job='MANAGER'
+--select *from emp where empno IN (7566,7788)
+--select *from emp where sal<1000 AND sal<3000
+--select *from emp where ename like 'A%'
+--select *from emp where emane with length 4
+--select *from emp where comm IS null
+--select *from emp where comm=0
+--select *from emp order by deptno desc,sal
+--select *from emp,dept
+--select *from emp CROSS JOIN dept
+
+----------------------------------------------
+--select e.EMPNO,e.ENAME,e.JOB,e.DEPTNO,d.deptno,d.DNAME,d.LOC
+--from emp e ,dept d
+--where e.deptno=d.deptno
+------------------------------------------------
+
+CREATE TABLE SALGRADE (
+ GRADE               NUMBER,
+ LOSAL               NUMBER,
+ HISAL               NUMBER);
+
+ 
+
+INSERT INTO SALGRADE VALUES (1,700,1200);
+INSERT INTO SALGRADE VALUES (2,1201,1400);
+INSERT INTO SALGRADE VALUES (3,1401,2000);
+INSERT INTO SALGRADE VALUES (4,2001,3000);
+INSERT INTO SALGRADE VALUES (5,3001,9999);
+
+select sal,grade from emp,salgrade
+where emp.sal between salgrade.losal and salgrade.hisal -- 
+
+-------------------------------------------------------
+
+
+select * from emp e, dept d where e.deptno(+)=d.deptno
+
+---------------------------------------------------------
+
+RULES
+
+
+Rules :
+•    Columns listed in select statement apart from group by function have to be listed in group by clause
+•    Columns listed in group by need not be listed in select statement
+•    Only group functions can be used in having clause
+•    Group functions listed in having clause need not be listed in select statement
+
+-----------------------------------------------------------------------------------------
+select * from emp;
+select * from dept;
+select deptno,job,mgr,hiredate from emp where ename='ALLEN';
+select *from emp where deptno=(select deptno from emp where job='CLERK');
+select * from emp where sal > (select deptno from emp where job='ALLEN');
+select * from emp where job='CLERK';
+select job,mgr,sal from emp where job='CLERK';
+
+select * from emp where sal>any (select deptno from emp where job='CLERK');
+select * from emp where sal<any (select deptno from emp where job='CLERK');
+select * from emp where  (select deptno from emp where job='CLERK');
